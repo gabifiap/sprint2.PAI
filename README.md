@@ -1,6 +1,6 @@
-# ⚡ GUIA GOODWE
+#  GUIA GOODWE
 
-### 👥 INTEGRANTES:
+###  INTEGRANTES:
 * **Gabriela Batista Costa** - 573583
 * **Anna Luiza Cavalhares** - 573330
 * **Samara Carvalho** - 573666
@@ -20,7 +20,7 @@ As estações de recarga atuais operam de forma "isolada" (sem inteligência nat
 
 ---
 
-### 🤖 COMO A IA PODE AJUDAR NISSO?
+###  COMO A IA PODE AJUDAR NISSO?
 
 **--CHATBOT CRIADO PARA SUPORTE DE POSTOS COMERCIAIS.**
 
@@ -52,5 +52,5 @@ Usamos o Google Gemini para nos apoiar na escrita das primeiras versões das ins
  **Passo 4: Configuração e Governança do Modelo Local via Modelfile**
 Com a lógica validada, migramos para o ambiente local utilizando o Ollama com o modelo Llama 3. Para customizar e blindar o modelo, criamos um arquivo de configuração chamado Modelfile: Ajuste: Definimos a temperatura em 0.2 para tornar as respostas precisas, reduzindo a margem para respostas "criativas" (alucinações).
 
-5️⃣ **Passo 5: Desenvolvimento da Interface Conversacional (Streamlit)**
+ **Passo 5: Desenvolvimento da Interface Conversacional (Streamlit)**
 Por fim, desenvolvemos o front-end utilizando o framework Streamlit em Python: Implementamos a janela de chat que envia a pergunta do usuário junto com o contexto do perfil para a API local do Ollama (ollama.chat).
