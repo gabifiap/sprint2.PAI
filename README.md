@@ -28,8 +28,11 @@ As estações de recarga atuais operam de forma "isolada" (sem inteligência nat
 * **Para o Técnico:** Traduz os relatórios de eficiência e ciclos em linguagem natural, permitindo que ele identifique rapidamente quais eletropostos precisam ser reiniciizados ou calibrados para evitar fuga de energia.
 * **Orquestração de Demanda de Potência**
 Para evitar que a rede elétrica local entre em colapso quando vários veículos carregam ao mesmo tempo, a solução central é:
+
 Smart Charging (Recarga Inteligente): Um sistema de software que monitora a carga total disponível na edificação ou na rede.
+
 Balanceamento de Carga (Load Balancing): Se a potência disponível for limitada, o sistema distribui a energia equitativamente entre os carregadores ativos ou prioriza veículos com baterias mais baixas, garantindo que o disjuntor geral não desarme.
+
 Limite de carregamento: quado o veículo atinge 100% de carga automaticamente a entrega de energia é interrompida.
 * **Pagamento:**
 Modelos de Negócio Diversificados: Implementação de cobrança por kWh consumido, por tempo de permanência ou modelos de assinatura para frotas.
