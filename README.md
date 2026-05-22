@@ -4,7 +4,7 @@
 * **Gabriela Batista Costa** - 573583
 * **Anna Luiza Cavalhares** - 573330
 * **Samara Carvalho** - 573666
-* **Kethelyn da Rocha** - 574016
+* **Kethelyn Rocha** - 574016
 
 ---
 
