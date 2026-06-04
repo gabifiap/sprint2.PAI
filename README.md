@@ -93,3 +93,7 @@ em seguida, para rodar a interface no navegador:
 
 ## 📋 Variáveis de ambiente necessárias: 
 GEMINI_API_KEY: Chave de autenticação gerada através do Google AI Studio. Ela permite que o backend se conecte aos modelos de inteligência artificial da Google para processar e responder às mensagens dos usuários.
+
+## 📋 URL da interface:
+
+https://sprint2pai-idqlhm3ijdackvo9aosecc.streamlit.app/
