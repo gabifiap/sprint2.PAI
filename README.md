@@ -47,20 +47,45 @@ Modelos de Negócio Diversificados: Implementação de cobrança por kWh consumi
 
 ---
 
-### 📝 DESCRIÇÃO DO SYSTEM PROMPT:
+### 📝 MELHORIAS DO SYSTEM PROMPT (SPRINT2):
+# 🚀 Evolução Técnica: Sprint 1 para Sprint 2
 
-O processo de desenvolvimento do ChargeGrid Intelligence foi dividido em 5 etapas principais, cobrindo desde a análise do problema até a validação das respostas da IA.
+* **Especialização do Conhecimento (Datasets):** A base de conhecimento do chatbot foi expandida com **quatro novos datasets estruturados**. Agora, o modelo é especializado em **diagnóstico de erros técnicos** (documentados no repositório como datasets2), **interpretação de estados de sinalização (LEDs)** em carregadores, **inteligência de carga**, **tarifação**, **fluxo comercial**, além de **requisitos elétricos, protocolos e hardware**. Essa segmentação eliminou respostas genéricas, permitindo que a IA ofereça diagnósticos precisos e alinhados aos manuais da GoodWe.
 
- **Passo 1: Modelagem do Domínio** O projeto começou com o mapeamento das regras de negócio da Good-We e das dores operacionais (desperdício de energia, ociosidade de vagas e alto custo de suporte). Nesta etapa, determinou-se que um sistema rígido de árvore de decisões não seria eficiente, optando-se por uma Solução Baseada em Modelos de Linguagem (LLMs).
+* **Ollama para Gemini API:** primeiramente, mudamos do processamento local via Ollama para a API **`gemini-2.5-flash`**, mas mantendo a mesma estrutura do código. A carga de processamento exigida pelos novos datasets tornava a execução local inviável, causando muita instabilidade na interface interativa. A solução em nuvem permitiu uma performance mais consistente e permitiu que a IA processe volumes maiores de datasets com um melhor desempenho.
 
- **Passo 2: Estruturação do Dataset de Referência**
-Para garantir que a IA respondesse corretamente e não inventasse informações, criamos um dataset de referência com perguntas e respostas fixas baseadas em dados simulados de telemetria e faturamento.
+* **Modernização da Interface (Frontend):** Desenvolvemos uma interface interativa baseada em **Streamlit**, rodando via VS Code e acessível diretamente pelo navegador. A mudança do Google Colab para o VScode foi fundamental para a fluidez do código, consdieramos a interface anterior limitada e o novo frontend oferece uma experiência mais natural e realista, permitindo a visualização clara das interações, melhor gestão do histórico da sessão e uma interação mais intuitiva com o usuário final.
 
- **Passo 3: Prototipagem no Google Colab**
-Usamos o Google Gemini para nos apoiar na escrita das primeiras versões das instruções e na formatação das regras. No Colab, validamos a lógica inicial em Python para garantir que o script conseguia capturar o perfil selecionado pelo usuário e concatenar a pergunta corretamente antes de enviar para um modelo.
+* **Segurança e Organização:** Implementamos o uso de **variáveis de ambiente (`.env`)** e o arquivo **`.gitignore`**, garantindo que as chaves de API permaneçam protegidas e não sejam expostas no repositório. 
 
- **Passo 4: Configuração e Governança do Modelo Local via Modelfile**
-Com a lógica validada, migramos para o ambiente local utilizando o Ollama com o modelo Llama 3. Para customizar e blindar o modelo, criamos um arquivo de configuração chamado Modelfile: Ajuste: Definimos a temperatura em 0.2 para tornar as respostas precisas, reduzindo a margem para respostas "criativas" (alucinações).
+* **Erros:** Adicionamos lógica de **tratamento de erros e reconexão automática**, garantindo que pequenas quedas na comunicação com a API não interrompam o atendimento ao usuário.
 
- **Passo 5: Desenvolvimento da Interface Conversacional (Streamlit)**
-Por fim, desenvolvemos o front-end utilizando o framework Streamlit em Python: Implementamos a janela de chat que envia a pergunta do usuário junto com o contexto do perfil para a API local do Ollama (ollama.chat).
+---
+
+### 🧪 Validação do Modelo (Testes da Sprint 1)
+
+Abaixo, documentamos os casos de teste estruturados na primeira fase do projeto, validados com o modelo atual após a implementação dos novos datasets e a migração para a API do Gemini.
+
+| Caso | Pergunta Enviada | Resposta Obtida | Avaliação |
+| :--- | :--- | :--- | :--- |
+| **01** | Comércio com 5 carregadores GW7K: disjuntor geral não suporta. Como o ChargeGrid resolve sem trocar fiação? | "O ChargeGrid Intelligence resolve essa questão através do Controle Dinâmico de Carga (Dynamic Load Control). Este sistema monitora continuamente o consumo total de energia da sua edificação e ajusta ou pausa a velocidade de carregamento dos veículos conforme necessário." | **Adequada** |
+| **02** | Se eu chegar com meu carro as 18 em um ponto e o sistema estiver em modo de prioridade solar, o que acontece com a velocidade da minha recarga? | "Neste modo, o sistema prioriza o uso da energia fotovoltaica (solar) disponível. Como às 18h a geração de energia solar é mínima ou inexistente, o carregamento será lento ou poderá ser pausado, pois o sistema aguardará a disponibilidade de energia solar para otimizar o custo." | **Adequada** |
+| **03** | A IA consegue prever qual eletroposto estará mais lotado? | "Sim, o sistema ChargeGrid Intelligence utiliza a Inteligência Artificial para prever picos de consumo. Através da análise de sessões de recarga anteriores e padrões históricos, a IA consegue identificar períodos de maior demanda." | **Adequada** |
+| **04** | O que o sistema faz se eu tentar carregar meu carro e o prédio já estiver usando muita energia? | "O sistema ChargeGrid Intelligence ativará o Controle Dinâmico de Carga (Dynamic Load Control). Ele ajustará ou pausará a velocidade de carregamento do seu veículo com base no consumo total da edificação, garantindo que a demanda contratada não seja excedida." | **Adequada** |
+| **05** | Quais os benefícios de usar o modo de operação 2? | "O Modo de Operação 2, conhecido como 'Prioridade Solar', oferece o benefício de priorizar o uso da energia fotovoltaica (solar) gerada no local para a recarga dos veículos. Isso resulta em uma redução do consumo de energia da rede elétrica convencional." | **Adequada** |
+
+#### 💡 Diagnóstico e Segurança
+* **Emergências (Faíscas no conector):** "Desligue imediatamente o disjuntor do carregador para cortar o fornecimento de energia e evitar maiores riscos. Após isso, entre em contato com o suporte técnico da GoodWe."
+* **Diagnóstico de Falhas (Luz vermelha):** "Acesse o aplicativo oficial SEMS Portal ou SolarGo em seu celular, localize o carregador e identifique o código de erro exato gerado pelo sistema. Com esse código, poderei fornecer a solução específica."*
+
+ ---
+## 🛠️ Configuração e Execução
+
+### 📋 Dependências
+Este projeto utiliza bibliotecas essenciais para a interface e a comunicação com a IA. Para instalar todas as dependências necessárias, execute o comando abaixo no terminal:
+
+"```bash
+pip install streamlit google-genai python-dotenv"
+
+## 📋 Variáveis de ambiente necessárias: 
+Gemini api key
