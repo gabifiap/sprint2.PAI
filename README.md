@@ -54,7 +54,7 @@ Modelos de Negócio Diversificados: Implementação de cobrança por kWh consumi
 
 * **Ollama para Gemini API:** primeiramente, mudamos do processamento local via Ollama para a API **`gemini-2.5-flash`**, mas mantendo a mesma estrutura do código. A carga de processamento exigida pelos novos datasets tornava a execução local inviável, causando muita instabilidade na interface interativa. A solução em nuvem permitiu uma performance mais consistente e permitiu que a IA processe volumes maiores de datasets com um melhor desempenho.
 
-* **Modernização da Interface (Frontend):** Desenvolvemos uma interface interativa baseada em **Streamlit**, rodando via VS Code e acessível diretamente pelo navegador. A mudança do Google Colab para o VScode foi fundamental para a fluidez do código, consdieramos a interface anterior limitada e o novo frontend oferece uma experiência mais natural e realista, permitindo a visualização clara das interações, melhor gestão do histórico da sessão e uma interação mais intuitiva com o usuário final.
+* **Modernização da Interface (Frontend):** Desenvolvemos uma interface interativa baseada em **Streamlit**, rodando via VS Code e acessível diretamente pelo navegador. A mudança do Google Colab para o VScode foi fundamental para a fluidez do código, consideramos a interface anterior limitada e o novo frontend oferece uma experiência mais natural e realista, permitindo a visualização clara das interações, melhor gestão do histórico da sessão e uma interação mais intuitiva com o usuário final.
 
 * **Segurança e Organização:** Implementamos o uso de **variáveis de ambiente (`.env`)** e o arquivo **`.gitignore`**, garantindo que as chaves de API permaneçam protegidas e não sejam expostas no repositório. 
 
