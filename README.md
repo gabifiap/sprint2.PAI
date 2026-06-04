@@ -80,13 +80,16 @@ Abaixo, documentamos os casos de teste estruturados na primeira fase do projeto,
 * **Diagnóstico de Falhas (Luz vermelha):** "Acesse o aplicativo oficial SEMS Portal ou SolarGo em seu celular, localize o carregador e identifique o código de erro exato gerado pelo sistema. Com esse código, poderei fornecer a solução específica."*
 
  ---
-## 🛠️ Configuração e Execução
+## 🛠️ Instruções de Execução
 
 ### 📋 Dependências
 Este projeto utiliza bibliotecas essenciais para a interface e a comunicação com a IA. Para instalar todas as dependências necessárias, execute o comando abaixo no terminal:
 
-"```bash
-pip install streamlit google-genai python-dotenv"
+"python -m pip install streamlit google-genai python-dotenv"
+
+em seguida, para rodar a interface no navegador: 
+
+"python -m streamlit run sprint2/app.py"
 
 ## 📋 Variáveis de ambiente necessárias: 
-Gemini api key
+GEMINI_API_KEY: Chave de autenticação gerada através do Google AI Studio. Ela permite que o backend se conecte aos modelos de inteligência artificial da Google para processar e responder às mensagens dos usuários.
