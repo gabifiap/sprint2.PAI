@@ -1,5 +1,5 @@
 import streamlit as st
-import google.genai as genai # Atualizado para a versão correta da SDK
+import google.genai as genai 
 
 # Puxa a função de inteligência e os datasets do arquivo bot.py
 from bot import responder_usuario
@@ -36,5 +36,4 @@ if pronto := st.chat_input("Digite sua dúvida técnica..."):
     with st.chat_message("assistant"):
         st.markdown(resposta_da_ia)
     st.session_state.historico.append({"role": "assistant", "content": resposta_da_ia})
-        st.markdown(resposta_da_ia)
     st.session_state.historico.append({"role": "assistant", "content": resposta_da_ia})
