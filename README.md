@@ -43,7 +43,10 @@ Modelos de Negócio Diversificados: Implementação de cobrança por kWh consumi
 
 * **Google Gemini:** (IA de Apoio, design do modelfile)
 * **Google Colab:** (Ambiente de Desenvolvimento, para criar, testar e rodar o código Python)
-* **Ollama:** (Motor de Inferência Local, modelfile) Para executar o modelo de linguagem final diretamente na infraestrutura controlada pela empresa, garantindo autonomia.
+* **Ollama:** (Motor de Inferência Local, modelfile) Para executar o modelo de linguagem da sprint 1 .
+* **VScode:** Para executar o modelo de linguagem final diretamente na infraestrutura controlada pela empresa, garantindo autonomia. * * * **Streamlit:** Plataforma da interface demonstrativa final
+    
+
 
 ---
 
