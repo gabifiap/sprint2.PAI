@@ -38,7 +38,7 @@ data_comercial = {
         "Estão disponíveis os modos 'Prioridade para Solar' (usa excedente fotovoltaico), 'FV + BAT' (usa solar e baterias) e o modo 'Rápido' [11-13].",
         "Através da plataforma em nuvem SEMS Portal ou do aplicativo SolarGo, que permitem monitorar telemetria e gerenciar frotas [14-16].",
         "Sim, através das Configurações de Energia (Limit Output Power) no aplicativo, é possível definir um limite inferior à potência nominal [17].",
-        "O sistema estima o tempo baseando-se na carga necessária, considerando uma média de aproximadamente 1 minuto para cada 2% de recarga [18]."
+        "O sistema estima o tempo baseando-se na carga necessária, considering uma média de aproximadamente 1 minuto para cada 2% de recarga [18]."
     ]
 }
 
@@ -320,7 +320,6 @@ for var_name, titulo in datasets_mapeados.items():
     if var_name in globals():
         datasets_texto += f"\n{titulo}:\n{globals()[var_name]}\n"
 
-# Este se torna o prompt final e idêntico que alimenta a inteligência do Gemini
 PROMPT_GEMINI_COMPLETO = f"{SYSTEM_PROMPT}\n{datasets_texto}"
 
 
@@ -329,7 +328,7 @@ PROMPT_GEMINI_COMPLETO = f"{SYSTEM_PROMPT}\n{datasets_texto}"
 client = genai.Client(api_key=api_key)
 
 import time
-from google.genai.errors import ServerError, ClientError # Adicionado ClientError aqui
+from google.genai.errors import ServerError, ClientError
 
 def responder_usuario(mensagem_usuario):
     """
@@ -350,26 +349,24 @@ def responder_usuario(mensagem_usuario):
         return response.text
         
     except ServerError as e:
-        # Se o servidor do Google piscar (Erro 503), aciona o plano B:
-        if e.status_code == 503:
+        # Se o servidor do Google piscar (Erro 503), aciona o plano B com tratamento seguro de erro
+        try:
             time.sleep(3)  # Espera 3 segundos para o servidor respirar
-            try:
-                response = chat.send_message(mensagem_usuario)
-                return response.text
-            except:
-                return "⚠️ O servidor do Gemini está muito instável agora. Por favor, aguarde um minutinho e envie sua mensagem novamente!"
-        else:
-            return f"❌ Erro de Comunicação no Servidor: {str(e)}"
+            response = chat.send_message(mensagem_usuario)
+            return response.text
+        except:
+            return "⚠️ O servidor do Gemini está muito instável agora. Por favor, aguarde um minutinho e envie sua mensagem novamente!"
 
     except ClientError as e:
-        # Captura erros 401 (Autenticação) e 429 (Limite de requisições - Quota)
-        if e.status_code == 401:
-            return "🔑 Erro 401: Suas credenciais/chave de API do Gemini estão inválidas ou não foram encontradas. Verifique seu arquivo .env!"
-        elif e.status_code == 429:
+        # Tratamento universal seguro capturando a mensagem de erro do cliente de texto puro (evita falha de status_code)
+        erro_msg = str(e).lower()
+        if "401" in erro_msg or "unauthenticated" in erro_msg or "api key" in erro_msg:
+            return "🔑 Erro de Autenticação: Sua chave de API do Gemini (GEMINI_API_KEY) está inválida, incorreta ou não foi detectada. Verifique as configurações do seu ambiente!"
+        elif "429" in erro_msg or "quota" in erro_msg:
             return "⏳ Erro 429: Limite de requisições excedido (Quota). Por favor, aguarde alguns segundos antes de tentar novamente."
         else:
-            return f"🚫 Erro de Cliente da API: {str(e)}"
+            return f"🚫 Erro de Cliente da API Gemini: {e}"
 
     except Exception as e:
         # Evita a tela vermelha do Streamlit para qualquer outro erro desconhecido
-        return f"❌ Ocorreu um erro inesperado: {str(e)}"
+        return f"❌ Ocorreu um erro inesperado no processamento: {e}"
