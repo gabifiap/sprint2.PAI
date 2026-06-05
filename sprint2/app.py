@@ -29,10 +29,12 @@ if pronto := st.chat_input("Digite sua dúvida técnica..."):
     try:
         resposta_da_ia = responder_usuario(pronto)
     except Exception as e:
-        # Se algo der muito errado no bot.py, mostra um erro amigável em vez da tela vermelha
-        resposta_da_ia = f"❌ Ocorreu um erro ao processar sua mensagem: {str(e)}"
+        # Se algo der errado, captura e mostra a descrição textual direta do erro com segurança
+        resposta_da_ia = f"❌ Ocorreu um erro ao processar sua mensagem. Detalhes: {e}"
 
     # Exibe a resposta do chatbot na tela
     with st.chat_message("assistant"):
+        st.markdown(resposta_da_ia)
+    st.session_state.historico.append({"role": "assistant", "content": resposta_da_ia})
         st.markdown(resposta_da_ia)
     st.session_state.historico.append({"role": "assistant", "content": resposta_da_ia})
