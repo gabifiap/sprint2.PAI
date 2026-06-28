@@ -10,7 +10,7 @@
 
 ### ⚠️ PROBLEMA ABORDADO: 
 
-As estações de recarga atuais operam de forma "isolada" (sem inteligência nativa), o que gera problemas para a empresa:
+As estações de recarga de carros automáticos atuais operam de forma "isolada" (sem inteligência nativa), o que gera problemas para a empresa:
 
  **Vagas Presas (Desperdício de Janela de Carga):** Quando um veículo atinge 100% da bateria e continua plugado, ele bloqueia a energia que poderia estar alimentando outro carro. Isso reduz a eficiência da estação e gera o desperdício de "potência ociosa" da infraestrutura disponível.
 
